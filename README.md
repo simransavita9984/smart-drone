@@ -1,46 +1,28 @@
 # smart-drone
-The calibration sketch stops working when a character or number is send. When sending a character via the serial monitor of some Arduino IDE’s a line feed is also send. Because the ESC calibration program only expects one character the program stops working.
+https://www.linkedin.com/posts/simran-savita_smart-activity-7124038780205883392-K8nA?utm_source=share&utm_medium=member_desktop
+Project Overview
+Project Name: Smart Drone
+#Description: An autonomous drone system with integrated pollution detection capabilities using Arduino IDE, C++.
+Features
+#Navigation: Programmed using Arduino for smooth and accurate movements.
+#Pollution Detection: Detects pollutants using integrated sensors.
+Error Handling: Improved control stability by addressing NaN errors in pitch and roll calculations.
+#Installation
+Clone the repository: git clone https://github.com/simransavita9984/smart-drone.git
+Open the .ino files in Arduino IDE.
+Upload to your Arduino board.
+Usage
+Run the calibration sketch first to ensure proper motor functionality.
+Use the flight controller code for navigation and control.
+Technologies Used
+Arduino IDE
+C++
 
-In the code the line:
-data = Serial.read();                                                               //Read the incomming byte.
+Contributors
+Simran Savita - GitHub Profile
+Aman Yadav - https://www.linkedin.com/in/aman-yadav-999a43226/(linkdin profile)
+Khushi Sharma - https://www.linkedin.com/in/khushi-sharma-731790253/
+Tauseef Ahmad - https://www.linkedin.com/in/tauseef-ahmad-5944b5253/
 
-Is changed into:
-data = Serial.read();                                                               //Read the incomming byte.
-delay(100);                                                                         //Wait for any other bytes to come in
-while(Serial.available() > 0)loop_counter = Serial.read();                          //Empty the Serial buffer.
-=====================================================================================================================================================
-With the newer Arduino IDE versions (1.6.x and up) the setup program hangs due to optimization of the compiler. This is fixed in this version.
-
-The starting speed of the motors is reduced to 1100us.
-
-
-=====================================================================================================================================================
-The last code did not fix the complete problem so I had to make another adjustment to the code. The acc_x and acc_y values can also be negative so a simple smaller or greater test does not work.
-Therefor I changed the code to:
-
-if(abs(acc_y) < acc_total_vector){                                        //Prevent the asin function to produce a NaN
-  angle_pitch_acc = asin((float)acc_y/acc_total_vector)* 57.296;          //Calculate the pitch angle.
-}
-if(abs(acc_x) < acc_total_vector){                                        //Prevent the asin function to produce a NaN
-  angle_roll_acc = asin((float)acc_x/acc_total_vector)* -57.296;          //Calculate the roll angle.
-}
-
-This prevents a division by zero and the input value for the asin function will always be smaller than 1.
-=====================================================================================================================================================
-There was a NaN (not a number) problem in the code. When flying more aggressive the quadcopter could become uncontrolable. The NaN problem is caused by the following:
-When the absolute value of acc_y or acc_x becomes larger that the acc_total_vector the values provided to the asin function is larger than 1 and the asin function produces a NaN.
-It recovers when the acc_total_vector becomes larger that the acc_x or acc_y values. But due to the complimentary filter the NaN error persists.
-This problem will only occur when flying aggressive / fast descents. 
-
-I changed the code as followed:
-from:
-angle_pitch_acc = asin((float)acc_y/acc_total_vector)* 57.296;            //Calculate the pitch angle.
-angle_roll_acc = asin((float)acc_x/acc_total_vector)* -57.296;            //Calculate the roll angle.
-
-to:
-if(acc_y > acc_total_vector){
-  angle_pitch_acc = asin((float)acc_y/acc_total_vector)* 57.296;            //Calculate the pitch angle.
-}
-if(acc_x > acc_total_vector){
-  angle_roll_acc = asin((float)acc_x/acc_total_vector)* -57.296;            //Calculate the roll angle.
-}
+Future Enhancements
+Adding obstacle detection using ultrasonic sensors.
