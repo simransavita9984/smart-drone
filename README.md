@@ -1,4 +1,4 @@
-# 🚁 Smart Drone
+# 🚁 Smart Pollution Detection System(AirSense Drone)
 
 [🔗 LinkedIn Post](https://www.linkedin.com/posts/simran-savita_smart-activity-7124038780205883392-K8nA?utm_source=share&utm_medium=member_desktop)
 
