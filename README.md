@@ -31,7 +31,7 @@ Improved control stability by addressing NaN errors in pitch and roll calculatio
 
 ## Contributors
 
-- **Simran Savita** – [GitHub Profile](https://github.com/simransavita9984)
+- **Simran Savita** – [LinkedIn Profile](https://www.linkedin.com/in/simran-savita/)
 - **Aman Yadav** – [LinkedIn Profile](https://www.linkedin.com/in/aman-yadav-999a43226/)
 - **Khushi Sharma** – [LinkedIn Profile](https://www.linkedin.com/in/khushi-sharma-731790253/)
 - **Tauseef Ahmad** – [LinkedIn Profile](https://www.linkedin.com/in/tauseef-ahmad-5944b5253/)
